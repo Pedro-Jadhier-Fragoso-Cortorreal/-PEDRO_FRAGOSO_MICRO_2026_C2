@@ -1,0 +1,67 @@
+menu "Reaction Timer Configuration"
+config REACCION_PB1_GPIO
+    int "GPIO del boton PB1 (presionar y sostener)"
+    default 4
+    range 0 39
+
+config REACCION_PB2_GPIO
+    int "GPIO del boton PB2 (pulsar tras la senal)"
+    default 5
+    range 0 39
+    help
+        En ESP32, GPIO5 es pin de strap: evita presionarlo al encender.
+
+config REACCION_LED_GPIO
+    int "GPIO del LED (senal de soltar)"
+    default 13
+    range 0 39
+    help
+        En ESP32 (original) evita GPIO6-11: estan ocupados por la flash.
+
+config REACCION_DELAY_MIN_MS
+    int "Retardo aleatorio minimo (ms)"
+    default 1500
+    range 200 10000
+
+config REACCION_DELAY_MAX_MS
+    int "Retardo aleatorio maximo (ms)"
+    default 4000
+    range 200 30000
+
+config REACCION_WIFI_SSID
+    string "WiFi SSID"
+    default "myssid"
+    help
+        Nombre (SSID) de la red WiFi a la que se conecta el ESP32.
+
+config REACCION_WIFI_PASSWORD
+    string "WiFi Password"
+    default ""
+    help
+        Contrasena de la red WiFi (vaciar si es una red abierta).
+
+config REACCION_MQTT_URI
+    string "MQTT broker URI"
+    default "mqtt://broker.hivemq.com:1883"
+    help
+        URI del broker MQTT. Para TLS usar mqtts://...
+
+config REACCION_MQTT_USER
+    string "MQTT username (opcional)"
+    default ""
+    help
+        Usuario del broker si lo requiere. Dejar vacio si no usa credenciales.
+
+config REACCION_MQTT_PASSWORD
+    string "MQTT password (opcional)"
+    default ""
+    help
+        Contrasena del broker si lo requiere.
+
+config REACCION_MQTT_TOPIC_PREFIX
+    string "Prefijo de topics MQTT"
+    default "reaccion"
+    help
+        Todos los topics se publican bajo este prefijo,
+        p.ej. reaccion/state, reaccion/result, reaccion/status, reaccion/command.
+endmenu
